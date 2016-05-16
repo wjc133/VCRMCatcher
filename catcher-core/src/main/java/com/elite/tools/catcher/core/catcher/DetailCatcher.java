@@ -1,5 +1,7 @@
 package com.elite.tools.catcher.core.catcher;
 
+import com.elite.tools.catcher.core.domain.PhoneData;
+import com.elite.tools.catcher.core.parse.JsonParser;
 import com.google.common.collect.Lists;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -14,14 +16,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Created by df on 16/5/12.
+ * Created by df on 16/5/15.
  */
-public class BaiduIndexRobber {
-    private final String url = "http://vcrm.baidu.com/ipage2/ipage/trustv-ocrm-v2/listAccountByPage.do";
+public class DetailCatcher {
 
-    public String grab(String casId, String casSt, String pageNum) {
+    private final Pattern PATTERN_PHONE = Pattern.compile("(?<=data\\.dataList\\s=\\s).+(?=;)");
+    private String url = "http://vcrm.baidu.com/ipage2/ipage/trustv-ocrm-v2/account/acctinfo.htm";
+
+    public List<PhoneData> grab(String token, String acctId, String casId, String casSt) {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         InputStream in = null;
@@ -31,13 +37,9 @@ public class BaiduIndexRobber {
             HttpPost post = new HttpPost(url);
             post.setHeader(new BasicHeader("Cookie", cookie));
             List<NameValuePair> params = Lists.newArrayList();
-            params.add(new BasicNameValuePair("from", "trustv-ocrm-v2/account/acclist"));
-            params.add(new BasicNameValuePair("sid", "listAccountByPage"));
-            params.add(new BasicNameValuePair("orgId", "145"));
-            params.add(new BasicNameValuePair("operatorId", "6001276"));
-            params.add(new BasicNameValuePair("pageNum", pageNum));
-            params.add(new BasicNameValuePair("pageSize", "10"));
-            params.add(new BasicNameValuePair("isAjax", "true"));
+            params.add(new BasicNameValuePair("token", token));
+            params.add(new BasicNameValuePair("isFrag", "true"));
+            params.add(new BasicNameValuePair("acctId", acctId));
             post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
             response = client.execute(post);
@@ -45,7 +47,8 @@ public class BaiduIndexRobber {
             if (stateCode == 200) {
                 in = response.getEntity().getContent();
                 byte[] data = getData(in);
-                return new String(data, "UTF-8");
+                String responseHtml = new String(data, "UTF-8");
+                return parseHtml(responseHtml);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,6 +74,17 @@ public class BaiduIndexRobber {
                     e.printStackTrace();
                 }
             }
+        }
+        return null;
+    }
+
+    private List<PhoneData> parseHtml(String responseHtml) {
+//        Document doc = Jsoup.parse(responseHtml);
+//        doc.
+        Matcher matcher = PATTERN_PHONE.matcher(responseHtml);
+        if (matcher.find()) {
+            String phoneStr = matcher.group();
+            return JsonParser.getPhoneDatas(phoneStr);
         }
         return null;
     }
