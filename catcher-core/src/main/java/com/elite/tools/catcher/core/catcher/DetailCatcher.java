@@ -84,7 +84,12 @@ public class DetailCatcher {
         Matcher matcher = PATTERN_PHONE.matcher(responseHtml);
         if (matcher.find()) {
             String phoneStr = matcher.group();
-            return JsonParser.getPhoneDatas(phoneStr);
+            try {
+                return JsonParser.getPhoneDatas(phoneStr);
+            } catch (Exception e) {
+                System.out.println("has an error: phoneStr=" + phoneStr);
+                e.printStackTrace();
+            }
         }
         return null;
     }
