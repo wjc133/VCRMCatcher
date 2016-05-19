@@ -21,7 +21,7 @@ import java.util.List;
 public class BaiduIndexRobber {
     private final String url = "http://vcrm.baidu.com/ipage2/ipage/trustv-ocrm-v2/listAccountByPage.do";
 
-    public String grab(String casId, String casSt, String pageNum) {
+    public String grab(String casId, String casSt, String pageNum,String operatorId) {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         InputStream in = null;
@@ -34,7 +34,7 @@ public class BaiduIndexRobber {
             params.add(new BasicNameValuePair("from", "trustv-ocrm-v2/account/acclist"));
             params.add(new BasicNameValuePair("sid", "listAccountByPage"));
             params.add(new BasicNameValuePair("orgId", "145"));
-            params.add(new BasicNameValuePair("operatorId", "6001257"));
+            params.add(new BasicNameValuePair("operatorId", operatorId));
             params.add(new BasicNameValuePair("pageNum", pageNum));
             params.add(new BasicNameValuePair("pageSize", "10"));
             params.add(new BasicNameValuePair("isAjax", "true"));
