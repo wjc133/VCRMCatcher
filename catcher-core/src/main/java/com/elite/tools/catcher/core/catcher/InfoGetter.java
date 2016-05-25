@@ -32,8 +32,7 @@ public class InfoGetter {
         int total = -1;
         int currentPage = 1;
         do {
-            String jsonStr = indexRobber.grab(casId, casSt, String.valueOf(currentPage), operatorId);
-            ServerResponse response = JsonParser.getServerResponse(jsonStr);
+            ServerResponse response = indexRobber.grab(casId, casSt, String.valueOf(currentPage), operatorId);
             if (response != null) {
                 Data data = response.getData();
                 if (data != null) {
