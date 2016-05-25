@@ -20,6 +20,7 @@
         <gson.version>2.6.2</gson.version>
         <mapstruct.version>1.0.0.Final</mapstruct.version>
         <jsoup.version>1.9.1</jsoup.version>
+        <soar.version>0.0.1-SNAPSHOT</soar.version>
     </properties>
 
     <dependencyManagement>
@@ -60,7 +61,11 @@
                 <version>${jsoup.version}</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>com.elite.tools</groupId>
+                <artifactId>soar-core</artifactId>
+                <version>${soar.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
