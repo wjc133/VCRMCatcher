@@ -18,11 +18,13 @@ public class InfoGetter {
     private String casId;
     private String casSt;
     private String token;
+    private String operatorId;
 
-    public InfoGetter(String casId, String casSt, String token) {
+    public InfoGetter(String casId, String casSt, String token, String operatorId) {
         this.casId = casId;
         this.casSt = casSt;
         this.token = token;
+        this.operatorId = operatorId;
     }
 
     public List<Content> getIndexInfo() {
@@ -30,7 +32,7 @@ public class InfoGetter {
         int total = -1;
         int currentPage = 1;
         do {
-            String jsonStr = indexRobber.grab(casId, casSt, String.valueOf(currentPage));
+            String jsonStr = indexRobber.grab(casId, casSt, String.valueOf(currentPage), operatorId);
             ServerResponse response = JsonParser.getServerResponse(jsonStr);
             if (response != null) {
                 Data data = response.getData();

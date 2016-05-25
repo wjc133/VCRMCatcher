@@ -16,14 +16,15 @@ import java.util.List;
  */
 public class BootStrap {
     public static void main(String[] args) {
-        if (args == null || args.length != 3) {
+        if (args == null || args.length != 4) {
             System.out.println("illegal params");
             System.exit(0);
         }
         String casId = args[0];
         String casSt = args[1];
         String token = args[2];
-        InfoGetter infoGetter = new InfoGetter(casId, casSt, token);
+        String operatorId = args[3];
+        InfoGetter infoGetter = new InfoGetter(casId, casSt, token, operatorId);
         List<Content> contents = infoGetter.getIndexInfo();
         if (contents != null && contents.size() > 0) {
             List<ContentVo> contentVos = Lists.newArrayList();

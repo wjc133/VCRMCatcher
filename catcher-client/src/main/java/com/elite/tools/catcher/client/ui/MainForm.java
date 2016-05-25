@@ -27,6 +27,7 @@ public class MainForm {
     private JLabel casStLabel;
     private JLabel tokenLabel;
     private JButton startButton;
+    private JTextField operatorIdEdit;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("百度VCRM工具");
@@ -41,9 +42,10 @@ public class MainForm {
                 String casId = form.casIdEdit.getText();
                 String casSt = form.casStEdit.getText();
                 String token = form.tokenEdit.getText();
+                String operatorId = form.operatorIdEdit.getText();
 
                 if (infoGetter == null) {
-                    infoGetter = new InfoGetter(casId, casSt, token);
+                    infoGetter = new InfoGetter(casId, casSt, token, operatorId);
                 }
                 List<Content> contents = infoGetter.getIndexInfo();
                 if (contents != null && contents.size() > 0) {
