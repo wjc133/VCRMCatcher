@@ -1,5 +1,7 @@
 package com.elite.tools.catcher.client.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 /**
@@ -10,6 +12,8 @@ public class ContentVo {
     private String companyName;   //公司名称
     private String siteUrl;  //网址
     private String rechargeDate;   //费用截止日期
+    private String acctName;  //账户名称
+    private String addressDetail;  //详细地址
     private List<PhoneDataVo> phoneDataVos; //Phone信息
 
     public String getAcctId() {
@@ -52,6 +56,40 @@ public class ContentVo {
         this.phoneDataVos = phoneDataVos;
     }
 
+    public String getAcctName() {
+        return acctName;
+    }
+
+    public void setAcctName(String acctName) {
+        this.acctName = acctName;
+    }
+
+    public String getAddressDetail() {
+        return addressDetail;
+    }
+
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail;
+    }
+
+    public String getPhoneDatas() {
+        StringBuilder builder = new StringBuilder();
+        if (phoneDataVos == null) {
+            return null;
+        }
+        for (PhoneDataVo phoneDataVo : phoneDataVos) {
+            String name = phoneDataVo.getName();
+            if (StringUtils.isEmpty(name)) {
+                continue;
+            }
+            builder.append(name).append(" ");
+            builder.append(phoneDataVo.getMobilePhone()).append(" ");
+            builder.append(phoneDataVo.getTelephone()).append(" ");
+            builder.append(phoneDataVo.getEmail()).append("  ");
+        }
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         return "ContentVo{" +
@@ -59,6 +97,9 @@ public class ContentVo {
                 ", companyName='" + companyName + '\'' +
                 ", siteUrl='" + siteUrl + '\'' +
                 ", rechargeDate='" + rechargeDate + '\'' +
+                ", acctName='" + acctName + '\'' +
+                ", addressDetail='" + addressDetail + '\'' +
+                ", phoneDataVos=" + phoneDataVos +
                 '}';
     }
 }

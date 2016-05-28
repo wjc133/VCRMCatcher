@@ -4,6 +4,7 @@ import com.elite.tools.catcher.core.domain.PhoneData;
 import com.elite.tools.catcher.core.parse.JsonParser;
 import com.google.common.collect.Lists;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -34,7 +35,11 @@ public class DetailCatcher {
         try {
             String cookie = "__cas__id__309=" + casId + ";__cas__st__309=" + casSt;
             client = HttpClients.createDefault();
+//            client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 1000);
+//            client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,1000);
+            RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(10000).setConnectTimeout(10000).build();//设置请求和传输超时时间
             HttpPost post = new HttpPost(url);
+            post.setConfig(requestConfig);
             post.setHeader(new BasicHeader("Cookie", cookie));
             List<NameValuePair> params = Lists.newArrayList();
             params.add(new BasicNameValuePair("token", token));
@@ -52,6 +57,7 @@ public class DetailCatcher {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            DataCache.addErrorAcct(acctId);
         } finally {
             if (in != null) {
                 try {
