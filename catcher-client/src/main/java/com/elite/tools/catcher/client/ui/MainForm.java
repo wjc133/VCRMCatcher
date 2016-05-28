@@ -12,8 +12,10 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -31,9 +33,6 @@ public class MainForm {
     private JTextField casIdEdit;
     private JTextField casStEdit;
     private JTextField tokenEdit;
-    private JLabel casIdLabel;
-    private JLabel casStLabel;
-    private JLabel tokenLabel;
     private JButton startButton;
     private JTextField operatorIdEdit;
 
@@ -84,7 +83,22 @@ public class MainForm {
                     System.out.println("error accts:" + DataCache.getErrorAccts());
                     FileOutputStream out = null;
                     try {
-                        out = new FileOutputStream("/Users/df/wjc133/result.xlsx");
+                        JFileChooser fileChooser = new JFileChooser();
+                        fileChooser.addChoosableFileFilter(new FileFilter() {//添加文件过滤，保存文件格式为.txt格式的文件
+                            public boolean accept(File f) {//这个的意思是说，如果是目录或者为.txt文件格式的文件就显示出来
+                                if (f.isDirectory()) {//如果是目录就可以访问
+                                    return true;
+                                }
+                                return f.getName().endsWith(".xls");
+                            }
+
+                            public String getDescription() {
+                                return "*.xls";
+                            }
+                        });
+                        fileChooser.showSaveDialog(form.mainPanel);
+                        File file = fileChooser.getSelectedFile();
+                        out = new FileOutputStream(file);
                         exportService.export(contentVos, out);
                     } catch (FileNotFoundException e1) {
                         e1.printStackTrace();

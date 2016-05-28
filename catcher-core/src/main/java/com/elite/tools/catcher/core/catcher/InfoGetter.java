@@ -13,7 +13,7 @@ import java.util.List;
  * Created by df on 16/5/15.
  */
 public class InfoGetter {
-    private BaiduIndexRobber indexRobber = new BaiduIndexRobber();
+    private BasicRobber indexRobber = new BasicRobber();
     private DetailCatcher detailCatcher = new DetailCatcher();
     private String casId;
     private String casSt;

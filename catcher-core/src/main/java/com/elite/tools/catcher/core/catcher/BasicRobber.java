@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by df on 16/5/12.
  */
-public class BaiduIndexRobber {
+public class BasicRobber {
     private final String url = "http://vcrm.baidu.com/ipage2/ipage/trustv-ocrm-v2/listAccountByPage.do";
 
     public String grab(String casId, String casSt, String pageNum,String operatorId) {

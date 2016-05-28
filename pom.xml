@@ -22,6 +22,7 @@
         <jsoup.version>1.9.1</jsoup.version>
         <poi.version>3.14</poi.version>
         <sqlite.jdbc.version>3.8.11.2</sqlite.jdbc.version>
+        <soar.version>0.0.1-SNAPSHOT</soar.version>
     </properties>
 
     <dependencyManagement>
@@ -72,6 +73,12 @@
                 <groupId>org.xerial</groupId>
                 <artifactId>sqlite-jdbc</artifactId>
                 <version>${sqlite.jdbc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.elite.tools</groupId>
+                <artifactId>soar-core</artifactId>
+                <version>${soar.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
