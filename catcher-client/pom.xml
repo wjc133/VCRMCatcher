@@ -11,6 +11,11 @@
 
     <artifactId>catcher-client</artifactId>
 
+    <properties>
+        <jxbrowser.version>5.4.3</jxbrowser.version>
+        <beautyeye.version>3.7</beautyeye.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.elite.tools</groupId>
@@ -25,6 +30,44 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser</artifactId>
+            <version>${jxbrowser.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jxbrowser-5.4.3.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-win</artifactId>
+            <version>${jxbrowser.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jxbrowser-win-5.4.3.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-license</artifactId>
+            <version>${jxbrowser.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/license.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jb2011.lnf</groupId>
+            <artifactId>beautyeye</artifactId>
+            <version>${beautyeye.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/beautyeye.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>6.0.5</version>
         </dependency>
     </dependencies>
 
@@ -61,4 +104,93 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                    <mainClass>com.teamdev.jxbrowser.chromium.demo.JxBrowserDemo</mainClass>
+                                </manifest>
+                                <manifestEntries>
+                                    <Class-Path>lib/beautyeye-3.7.jar lib/jxbrowser-5.4.3.jar
+                                        lib/jxbrowser-win-5.4.3.jar lib/license.jar
+                                    </Class-Path>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>2.3.2</version>
+                        <configuration>
+                            <source>1.6</source>
+                            <target>1.6</target>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>ideauidesigner-maven-plugin</artifactId>
+                        <version>1.0-beta-1</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>javac2</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <fork>true</fork>
+                            <debug>false</debug>
+                            <failOnError>true</failOnError>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>2.10</version>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+                <!--<resources>-->
+                <!--<resource>-->
+                <!--<targetPath>lib/</targetPath>-->
+                <!--<directory>lib/</directory>-->
+                <!--<includes>-->
+                <!--<include>**/beautyeye.jar</include>-->
+                <!--<include>**/jxbrowser-5.4.3.jar</include>-->
+                <!--<include>**/jxbrowser-win-5.4.3.jar</include>-->
+                <!--<include>**/license.jar</include>-->
+                <!--</includes>-->
+                <!--</resource>-->
+                <!--</resources>-->
+            </build>
+        </profile>
+    </profiles>
 </project>
