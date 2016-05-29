@@ -50,6 +50,14 @@
 
         <dependency>
             <groupId>com.teamdev.jxbrowser</groupId>
+            <artifactId>jxbrowser-mac</artifactId>
+            <version>${jxbrowser.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jxbrowser-mac-5.4.3.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.teamdev.jxbrowser</groupId>
             <artifactId>jxbrowser-license</artifactId>
             <version>${jxbrowser.version}</version>
             <scope>system</scope>
@@ -123,7 +131,7 @@
                                 </manifest>
                                 <manifestEntries>
                                     <Class-Path>lib/beautyeye-3.7.jar lib/jxbrowser-5.4.3.jar
-                                        lib/jxbrowser-win-5.4.3.jar lib/license.jar
+                                        lib/jxbrowser-win-5.4.3.jar lib/license.jar lib/jxbrowser-mac-5.4.3.jar
                                     </Class-Path>
                                 </manifestEntries>
                             </archive>

@@ -23,4 +23,16 @@ public class DataCache {
         }
         return buffer.toString();
     }
+
+    public static List<String> getErrorAcct() {
+        return errorAcct;
+    }
+
+    public static void clearError() {
+        errorAcct.clear();
+    }
+
+    public static int getErrorSize() {
+        return errorAcct.size();
+    }
 }
