@@ -1,6 +1,7 @@
 package com.elite.tools.catcher.client.ui;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by wjc133
@@ -13,7 +14,20 @@ public class ProcessBarForm {
     private JPanel processPanel;
     private JFrame frame;
 
-    public void init() {
+    public ProcessBarForm() {
+        init();
+    }
+
+    public ProcessBarForm(Component parent) {
+        init();
+        setCenter(parent);
+    }
+
+    private void setCenter(Component parent) {
+        frame.setLocationRelativeTo(parent);
+    }
+
+    private void init() {
         frame = new JFrame();
         frame.setUndecorated(true);
         frame.setContentPane(processPanel);
@@ -24,6 +38,7 @@ public class ProcessBarForm {
             System.err.println("ProcessBar should inited before show it!");
             return;
         }
+        frame.pack();
         frame.setVisible(true);
     }
 
