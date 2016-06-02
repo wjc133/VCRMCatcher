@@ -71,9 +71,7 @@ public class JxBrowserDemo {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("帮助");
         JMenuItem item1 = new JMenuItem("关于");
-        JMenuItem item2 = new JMenuItem("实验室");
         menu.add(item1);
-        menu.add(item2);
         menuBar.add(menu);
         frame.setJMenuBar(menuBar);
         frame.pack();
