@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * Created by df on 16/5/12.
  */
-public class BasicRobber {
+class BaiduBasicGrabber {
     private final String url = "http://vcrm.baidu.com/ipage2/ipage/trustv-ocrm-v2/listAccountByPage.do";
 
-    public String grab(String casId, String casSt, String pageNum,String operatorId) {
+    String grab(String casId, String casSt, String pageNum, String operatorId) {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         InputStream in = null;
