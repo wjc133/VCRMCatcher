@@ -1,4 +1,4 @@
-package com.elite.tools.catcher.client.domain;
+package com.elite.tools.catcher.core.constant;
 
 /**
  * Created by df on 16/5/15.

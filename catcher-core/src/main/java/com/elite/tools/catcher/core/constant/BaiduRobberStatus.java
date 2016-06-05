@@ -15,18 +15,19 @@ public enum BaiduRobberStatus {
     START(102, "start"),
     PAUSE(103, "pause"),
     STOP(104, "stop"),
+    FINISH(105, "finish"),
     UNKNOWN(999, "unknown");
 
+
+    private Integer code;
+    private static Map<Integer, BaiduRobberStatus> statusMap = Maps.newHashMap();
+    private String message;
 
     static {
         for (BaiduRobberStatus status : EnumSet.allOf(BaiduRobberStatus.class)) {
             statusMap.put(status.code, status);
         }
     }
-
-    private Integer code;
-    private static Map<Integer, BaiduRobberStatus> statusMap = Maps.newHashMap();
-    private String message;
 
     static {
         for (BaiduRobberStatus status : EnumSet.allOf(BaiduRobberStatus.class)) {

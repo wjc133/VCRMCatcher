@@ -1,4 +1,4 @@
-package com.elite.tools.catcher.client.domain;
+package com.elite.tools.catcher.core.constant;
 
 import org.apache.commons.lang3.StringUtils;
 

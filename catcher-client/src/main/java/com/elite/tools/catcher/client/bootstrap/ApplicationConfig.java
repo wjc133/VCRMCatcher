@@ -8,12 +8,12 @@ import com.elite.tools.soar.toolbox.Soar;
  * DATE: 16/6/4
  * TIME: 上午11:52
  */
-class ApplicationConfig {
-    static void init() {
+public class ApplicationConfig {
+    public static void init() {
         HttpManager.INSTANCE.setRequestQueue(Soar.newRequestQueue());
     }
 
-    static void showUI() {
+    public static void showUI() {
 
     }
 }

@@ -1,6 +1,6 @@
 package com.elite.tools.catcher.client.export;
 
-import com.elite.tools.catcher.client.domain.ContentVo;
+import com.elite.tools.catcher.core.constant.ContentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;

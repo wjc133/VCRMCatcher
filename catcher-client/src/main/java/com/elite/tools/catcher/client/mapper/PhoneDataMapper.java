@@ -1,6 +1,6 @@
 package com.elite.tools.catcher.client.mapper;
 
-import com.elite.tools.catcher.client.domain.PhoneDataVo;
+import com.elite.tools.catcher.core.constant.PhoneDataVo;
 import com.elite.tools.catcher.core.domain.PhoneData;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

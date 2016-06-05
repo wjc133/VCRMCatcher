@@ -1,6 +1,6 @@
 package com.elite.tools.catcher.client.mapper;
 
-import com.elite.tools.catcher.client.domain.ContentVo;
+import com.elite.tools.catcher.core.constant.ContentVo;
 import com.elite.tools.catcher.core.domain.Content;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

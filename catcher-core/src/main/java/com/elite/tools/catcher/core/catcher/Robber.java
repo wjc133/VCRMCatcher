@@ -18,4 +18,6 @@ public interface Robber {
     boolean isReady();
 
     boolean isGrabing();
+
+    boolean isStopped();
 }
